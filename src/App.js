@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import * as firebase from "firebase/app";
 import "firebase/auth";
@@ -20,7 +19,7 @@ function App() {
   })
 
   const provider = new firebase.auth.GoogleAuthProvider();
-  const fbProvider = new firebase.auth.FacebookAuthProvider();//2.copy form firebase
+  const fbProvider = new firebase.auth.FacebookAuthProvider();
   const handleSignIn = () => {
     firebase.auth().signInWithPopup(provider)
     .then(res => {
@@ -40,7 +39,7 @@ function App() {
       console.log(err.message);
     })
   }
-  const handleFBLogin = () => {//copy from firebase
+  const handleFBLogin = () => {
     firebase.auth().signInWithPopup(fbProvider).then(function(result) {
       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
       var token = result.credential.accessToken;
@@ -146,7 +145,7 @@ function App() {
         <button onClick={handleSignIn}>Sign in</button>
       }
       <br/>
-      <button onClick ={handleFBLogin}>FB log in</button>
+      <button onClick ={handleFBLogin}>Sign in using Facebook</button>
       {
         user.isSignedIn && <div>
             <p>Welcome, {user.name}</p>
@@ -167,9 +166,6 @@ function App() {
       </form>
       <p style={{color: 'red'}}>{user.error}</p>
       {user.success && <p style={{color: 'green'}}>User {newUser ? 'Created' : 'Logged In' }Succesfully</p>}
-    
-
-      
     </div>
   );
 }
